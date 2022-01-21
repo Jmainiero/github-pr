@@ -9,6 +9,9 @@ app.options('*', cors())
 
 app.use('/', router)
 
+let server //We'll need this to close our server
+
+
 //Base Server Configuration
 const startServer = async () => {
     try {
@@ -28,8 +31,6 @@ const closeServer = async () => {
 
 if (require.main === module) {
     startServer().catch(err => console.log(err))
-
-    closeServer().catch(err => console.log(err))
 }
 
 module.exports = { app, startServer, closeServer }
