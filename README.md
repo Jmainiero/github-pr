@@ -21,10 +21,10 @@ The React Interface will automatically convert your GitHub repository URL and pa
 ## HOW TO RUN
 
 **Local Only:**
-1. Navigate to /server/ and install packages via npm install
-2. Turn on React UI via npm run start
-3. Navigate to /client/ and install packages via npm install
-4. Turn on React UI via npm run dev OR npm start; npm run dev supports nodemon.
+1. Navigate to /server/ and install packages via `npm install`
+2. Turn on React UI via `npm run start`
+3. Navigate to /client/ and install packages via `npm install`
+4. Turn on React UI via `npm run dev` OR `npm start`; `npm run dev` supports nodemon.
 5. Navigate to http://localhost:3000/ and query!
 
 EX github URL : https://github.com/colinhacks/zod
