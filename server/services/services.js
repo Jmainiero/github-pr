@@ -12,7 +12,7 @@ const grabRepoPulls = async (owner, repo) => {
         const query = await axios({
             method: "GET",
             headers: headers.headers,
-            url: `${baseURL}/repos/${owner}/${repo}/pulls?state=open` //Only get open PR
+            url: `${baseURL}/repos/${owner}/${repo}/pulls?state=open&per_page=100` //Only get open PR
         })
         return query.data;
     } catch (e) {

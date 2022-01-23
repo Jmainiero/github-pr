@@ -12,9 +12,10 @@ router.post('/queryRepository', async (req, res) => {
 
 		for (const pull of pulls) {
 			const commitCount = await grabPullCommits(owner, repo, pull.number)
-			r.push({ pull: pull.number, author: pull.user.login, url: pull.url, commitCount: commitCount })
+			r.push({ title: pull.title, pull: pull.number, author: pull.user.login, authPage: pull.user.html_url, avatar: pull.user.avatar_url ,url: pull.html_url, commitCount: commitCount })
 		}
-		return res.status(200).json({ data: r })
+		console.log('Successfully got repo data')
+		return res.status(200).json(r)
 	} catch (e) {
 		throw res.end(e)
 	}

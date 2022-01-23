@@ -1,5 +1,7 @@
 import './App.css';
-import { useState, useProps } from 'react'
+import { useState, useEffect } from 'react'
+import DisplayResults from './components/displayResults'
+import PacmanLoader from 'react-spinners/PacmanLoader'
 /*
   Creating a small page for our user. Sine this is backend focused, I won't worry too much about the frontend structure.
 */
@@ -10,28 +12,33 @@ function App() {
   const [message, setMessage] = useState("")
   const [owner, setOwner] = useState("")
   const [repo, setRepo] = useState("")
+  const [results, setResults] = useState("")
+  let [loading, setLoading] = useState(false);
+  let [color, setColor] = useState("#ffffff");
 
   const validateURL = () => {
     const rgx = new RegExp(/^(http(|s)\:\/\/)(github.com+(:\d+)?)(?::|\/)([\d\/\w.-]+?)?$/) //Regex to validate github urls EX: https://github.com/colinhacks/zod or https://github.com/
-    
+
     if (rgx.test(url)) {
-      setOwner(url.split('/')[url.split('/').length - 2 ])
-      setRepo(url.split('/')[url.split('/').length - 1 ])
+      setOwner(url.split('/')[url.split('/').length - 2])
+      setRepo(url.split('/')[url.split('/').length - 1])
       return true
     } else {
       return false
     }
   }
-
   let handleSubmit = async (e) => {
     e.preventDefault();
-
+    setResults("")
     if (!await validateURL()) {
       window.alert('Please Enter a Valid Repository URL')
       setMessage('')
       return;
     }
     try {
+
+      setLoading(true)
+
       let res = await axios({
         method: "POST",
         url: `http://localhost:5000/queryRepository`,
@@ -46,17 +53,20 @@ function App() {
       console.log(res)
       if (res.status === 200) {
         setUrl("");
-        setMessage("Grabbed Your Repo!");
-        window.alert(res.status)
+        setResults(res.data)
+        console.log(results)
       } else {
         console.log(res)
         window.alert(res.status)
-        setMessage("Something went wrong");
+        setMessage("Oh No. Something went wrong!");
       }
     } catch (err) {
       console.log(err);
     }
+    setLoading(false)
   };
+
+
   return (
     <div className="App">
       <div className="container">
@@ -66,7 +76,7 @@ function App() {
             <input
               type="url"
               value={url}
-              placeholder="Github Repository Url"
+              placeholder="GitHub Repository URL Goes Here"
               onChange={(e) => setUrl(e.target.value)}
             />
 
@@ -75,6 +85,8 @@ function App() {
             <div className="message">{message ? <p>{message}</p> : null}</div>
           </form>
         </div>
+        {loading ? <PacmanLoader/> : null}
+        {results ? <DisplayResults results={results} /> : null }
       </div>
     </div>
   );
