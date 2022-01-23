@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react'
 import DisplayResults from './components/displayResults'
 import PacmanLoader from 'react-spinners/PacmanLoader'
+
 /*
   Creating a small page for our user. Sine this is backend focused, I won't worry too much about the frontend structure.
 */
@@ -14,7 +15,11 @@ function App() {
   const [repo, setRepo] = useState("")
   const [results, setResults] = useState("")
   let [loading, setLoading] = useState(false);
-  let [color, setColor] = useState("#ffffff");
+
+  //Make sure we get the last character of the URL
+  useEffect(() => {
+    validateURL();
+  }, [url])
 
   const validateURL = () => {
     const rgx = new RegExp(/^(http(|s)\:\/\/)(github.com+(:\d+)?)(?::|\/)([\d\/\w.-]+?)?$/) //Regex to validate github urls EX: https://github.com/colinhacks/zod or https://github.com/
@@ -30,10 +35,10 @@ function App() {
   let handleSubmit = async (e) => {
     e.preventDefault();
     setResults("")
+    setMessage("")
     if (!await validateURL()) {
-      window.alert('Please Enter a Valid Repository URL')
-      setMessage('')
-      return;
+      setMessage('Please Enter a Valid GitHub URL')
+      return
     }
     try {
 
@@ -50,13 +55,10 @@ function App() {
           contentType: "application/json"
         }
       });
-      console.log(res)
       if (res.status === 200) {
         setUrl("");
         setResults(res.data)
-        console.log(results)
       } else {
-        console.log(res)
         window.alert(res.status)
         setMessage("Oh No. Something went wrong!");
       }
@@ -79,13 +81,11 @@ function App() {
               placeholder="GitHub Repository URL Goes Here"
               onChange={(e) => setUrl(e.target.value)}
             />
-
             <button type="submit">Query</button>
-
-            <div className="message">{message ? <p>{message}</p> : null}</div>
           </form>
+          {message ? <div className="message">{message}</div> : null}
         </div>
-        {loading ? <PacmanLoader/> : null}
+        {loading ? <PacmanLoader color="#000"/> : null}
         {results ? <DisplayResults results={results} /> : null }
       </div>
     </div>

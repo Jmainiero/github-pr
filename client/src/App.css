@@ -2,6 +2,8 @@
 
   Adding basic styling to not make it look terrible. Even backend developers want things to look nice. 
 
+  I would usually use SASS, but this'll do for now. 
+
 */
 
 .App {
@@ -23,6 +25,7 @@
 form {
   padding: 3rem;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 
@@ -103,22 +106,21 @@ button:hover {
 .message {
   font-size: 1.2em;
   text-align: center;
-  color: #36a936;
+  color: #9B0000;
 }
 
 
 .results {
   margin: 0 auto;
   text-align: left;
-  width: 80%;
+  width: 60%;
   overflow: hidden;
 }
 
 
 .results--entry {
-  padding-bottom: 2rem;
   display: flex;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .results--entry--left {
@@ -126,10 +128,12 @@ button:hover {
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
+  width: 50%
 }
 
 .results--entry--right {
   text-align: right;
+  width: 50%;
 
 }
 
@@ -138,8 +142,6 @@ button:hover {
   max-width: 20%;
   border-radius: 100%;
   object-fit: contain;
-  /* display: flex;
-  align-items: center; */
 }
 
 .results--entry__author,
@@ -161,10 +163,52 @@ button:hover {
 
 .results--entry p,
 .results--entry a {
-  padding: 0.5em 0.5em 0.5em
+  padding: 0.5em 0.5em 0.5em;
+  display: block;
 }
 
 .results--entry:not(:last-child) {
   border-bottom: 1px solid black;
 }
 
+
+ul {
+  text-transform: uppercase;
+  text-decoration: none;
+  list-style: none;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+li {
+  padding: 1rem;
+  display: inline-block;
+  transition: 0.3s ease all;
+    border-left: 1px solid #d3d3d3;
+    border-top: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+li:last-child{
+    border-right: 1px solid #d3d3d3;
+
+}
+
+li:not(:last-child) {
+  margin-right: 1px;
+
+}
+
+li a {
+  color: #ADD8E6;
+}
+
+
+li:hover {
+  background: #072227;
+  color: #fff;
+  font-weight: 700;
+  transform: translateY(-5px);
+  cursor: pointer;
+}
