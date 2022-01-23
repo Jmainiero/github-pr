@@ -20,7 +20,7 @@
 }
 
 
-form {
+form  {
   padding: 3rem;
   text-align: center;
 }
@@ -31,13 +31,20 @@ h1 {
   font-size: 24px;
 }
 
+input, button {
+  display: block;
+  margin: 0 auto;
+}
+
+
 input {
-  width: 80%;
+  width: 60%;
   height: 2rem;
   padding: 0.5rem;
   font-size: 1.1em;
   font-weight: 500;
   margin-bottom: 2rem;
+  border-radius: 5px;
 }
 
 button {
@@ -47,10 +54,12 @@ button {
   font-size: 1rem;
   border-radius: 0.2rem;
   cursor: pointer;
+  transition: 0.3s ease all;
 }
 
 button:hover {
   background-color: #c5c5c5;
+  transform: translateY(-5px);
 }
 
 .message {

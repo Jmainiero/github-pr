@@ -2,5 +2,7 @@
 /client/node_modules
 
 /server/.nvimlog
+.DS_Store
+/server/.DS_Store
 
 

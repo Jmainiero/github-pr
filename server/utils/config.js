@@ -1,5 +1,5 @@
 const port = process.env.port || 5000
-const baseURL = "https://api.github.com/"
-const gitToken = '573c9e56b0d59138acfafbc7dba8536930ed2121' //Typically I would store this in an .env file, but this'll do for now.
+const baseURL = "https://api.github.com"
+const gitToken = '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' //Typically I would store this in an .env file, but this'll do for now. (This token will expire anyway)
 
 module.exports = { port, baseURL, gitToken }
