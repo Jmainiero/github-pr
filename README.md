@@ -2,7 +2,7 @@
 
 ## ABOUT
 
-This is a simple NodeJS API that allows the user to pull basic info about pull requests for agiven repository.com/. The React Interface will automatically convert your GitHub repository URL and pass the appropraite fields to the server (owner, repo). No modification required on your end!
+This is a simple NodeJS API that allows the user to pull basic info about pull requests for a given repository.com. The React Interface will automatically convert your GitHub repository URL and pass the appropraite fields to the server (owner, repo). No modification required on your end!
 
 The API supports 3 endpoints, one primary two for very specific calls, for a particular repository.
 
