@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 const { grabRepoPulls, grabPullCommits } = require('../services/services')
 
-router.post('/queryRepository', async (req, res) => {
+router.post('/queryRepository', async (req, res, next) => {
 	try {
 		const { owner, repo } = req.query
-		if (!owner || !repo) return res.status(400).send({ msg: 'Invalid Owner or Repo. Please Try Again' })
+		if (!owner || !repo) return next(new Error('Invalid Owner or Repo. Please Try Again'))
 
 		const r = []
 		const pulls = await grabRepoPulls(owner, repo) //Pull our repo
@@ -17,32 +17,32 @@ router.post('/queryRepository', async (req, res) => {
 		}
 		return res.status(200).json(r)
 	} catch (e) {
-		return res.end(e)
+		return next(new Error(e))
 	}
 })
 
-router.post('/queryCommitCounts', async (req, res) => {
+router.post('/queryCommitCounts', async (req, res, next) => {
 	try {
 		const { owner, repo, pull } = req.query
-		if (!owner || !repo || !pull) return res.status(400).send({ msg: 'Invalid Owner or Repo. Please Try Again' })
+		if (!owner || !repo || !pull) return next(new Error('Invalid Owner, Repo, or Pull Number. Please Try Again'))
 
 		const commitCount = await grabPullCommits(owner, repo, pull)
 		return res.status(200).json(commitCount)
 	} catch (e) {
-		return res.end(e)
+		return next(new Error(e))
 	}
 })
 
-router.post('/queryPullRequests', async (req, res) => {
+router.post('/queryPullRequests', async (req, res, next) => {
 	try {
 		const { owner, repo } = req.query
-		if (!owner || !repo) return res.status(400).send({ msg: 'Invalid Owner or Repo. Please Try Again' })
+		if (!owner || !repo) return next(new Error('Invalid Owner or Repo. Please Try Again'))
 
 		const pulls = await grabRepoPulls(owner, repo) //Pull our repo
 
 		return res.status(200).json(pulls)
 	} catch (e) {
-		return res.end(e)
+		return next(new Error(e))
 	}
 })
 

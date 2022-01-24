@@ -7,7 +7,7 @@ function Items({ currentItems }) {
         <>
             {currentItems &&
                 currentItems.map((entry) => (
-                    <div className="results--entry">
+                    <div className="results--entry" key={entry.title}>
                         <div className="results--entry--left">
                             <img src={`${entry.avatar}`} className="results--entry__avatar" alt="avatar" />
                             <a className="results--entry__author" href={`${entry.authPage}`} target="_blank" rel="noopener noreferrer">{entry.author}</a>

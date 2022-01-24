@@ -17,7 +17,7 @@ const grabRepoPulls = async (owner, repo) => {
         })
         return query.data
     } catch (e) {
-        return e
+        throw new Error(e)
     }
 }
 
@@ -30,7 +30,7 @@ const grabPullCommits = async (owner, repo, number) => {
         });
         return query.data.length
     } catch (e) {
-        return e
+        throw new Error(e)
     }
 }
 

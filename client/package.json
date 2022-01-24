@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "github-pr-gui",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,6 +25,10 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
   },
   "browserslist": {
     "production": [

@@ -20,6 +20,16 @@ app.use(cors(corsOptions))
 
 app.use('/', router)
 
+//Global error handler to send to client.
+app.use((error, next, res, req) => {
+    res.status(error.status || 500)
+    res.json({
+        error: {
+            msg: error.message
+        }
+    })
+})
+
 let server //We'll need this to close our server
 
 //Base Server Configuration
